@@ -2,14 +2,16 @@
 
 **Authors**: Carly Huitema, Mathew Mozaffari
 
-**Date released**: _date of version release_
+**Date released**: 
 
 This overlay follows official OCA Package requirements documented at [https://github.com/agrifooddatacanada/OCA_package_standard](https://github.com/agrifooddatacanada/OCA_package_standard)
 
 **Description**:
- Preserving the order of attributes and entry codes can be very important for understanding data and for data entry and display. This overlay lets creators specify the ordering of attributes and entry codes of a specific schema bundle.
+
+Preserving the order of attributes and entry codes can be very important for understanding data and for data entry and display. This overlay lets creators specify the ordering of attributes and entry codes of a specific schema bundle.
 
 **Canonicalization Rules**:
+
 The ordering overlay begins with the canonical ordering of OCA overlays.
 1) d (digest of the overlay)
 2) capture_base (capture base SAID the overlay is specific to)
@@ -20,10 +22,6 @@ Next, the overlay contains order_attributes and order_entry_codes which are orde
 Inside order_attributes is an array of attributes which are insertion ordered. Inside order_entry_codes are attributes which are ordered lexicographically, with arrays of entry codes for each attribute which are insertion ordered.
 
 **Example**: 
- - Provide at least one example of the overlay which has been fully canonicalized and serialized (in JSON) for calculating the correct overlay SAID value. 
- - The capture_base SAID does not need to reference a specific capture_base but MUST be well formed. 
- - The capture_base example SAID is used in the calculations of the overlay SAID. 
- - The example MAY be formatted with line breaks and indentations, including reorganizing objects for readability after the SAID has been calculated.
 
 ```
 {
@@ -64,10 +62,7 @@ Inside order_attributes is an array of attributes which are insertion ordered. I
 
 
 **Test case**: 
- - At least one fully worked example MUST be provided.
- - The worked example MUST be a fully canonicalized, JSON serialized oca_package with SAIDs calculated. 
- - The fully worked example MUST include a minimal set of capture_base and any other overlays that the documented overlay depends on and MAY include more overlays. 
- - The example MUST NOT be transformed for readability or altered in any way that would interfere with the reproducible calculation of the SAID directly from the test case example.
+
 
 ## Normative references
 - [OCA specification v1.0.1](http://oca.colossi.network/specification/) 
