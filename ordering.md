@@ -1,4 +1,4 @@
-**Title**: Ordering by ADC: version: 1.0
+**Title**: Ordering by ADC - v1.0
 
 **Authors**: Carly Huitema, Mathew Mozaffari
 
@@ -17,9 +17,9 @@ The ordering overlay begins with the canonical ordering of OCA overlays.
 2) capture_base (capture base SAID the overlay is specific to)
 3) type (community/adc/ordering/1.0)
 
-Next, the overlay contains order_attributes and order_entry_codes which are ordered lexicographically according to [3.2.3 Sorting of Object Properties](https://www.rfc-editor.org/rfc/rfc8785#section-3.2.3). 
+Next, the overlay contains ordering_attributes and ordering_entry_codes which are ordered lexicographically according to [3.2.3 Sorting of Object Properties](https://www.rfc-editor.org/rfc/rfc8785#section-3.2.3). 
 
-Inside order_attributes is an array of attributes which are insertion ordered. Inside order_entry_codes are attributes which are ordered lexicographically, with arrays of entry codes for each attribute which are insertion ordered.
+Inside ordering_attributes is an array of attributes which are insertion ordered. Inside ordering_entry_codes are attributes which are ordered lexicographically, with arrays of entry codes for each attribute which are insertion ordered.
 
 **Example**: 
 
@@ -58,7 +58,7 @@ Inside order_attributes is an array of attributes which are insertion ordered. I
  - Every attribute present in this overlay MUST be present in the capture_base of the source schema.
  - Each entry code present in this overlay MUST be present in the entry overlay of the source schema.
  - Each attribute MUST appear at most once, and MAY appear zero times.
- - Each entry code (for each attribute) MUST appear at most once, and MAY appear zero times.
+ - Each entry code (in an entry code set) MUST appear at most once, and MAY appear zero times.
 
 
 **Test case**: 
