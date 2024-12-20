@@ -1,6 +1,6 @@
 **Title**: Ordering by ADC - v1.0 - DRAFT
 
-**Community Grouping**: community/adc/extension/v1.0
+**Community Grouping**: community/adc/extension/vXX
 
 **Authors**: Carly Huitema, Mathew Mozaffari
 
