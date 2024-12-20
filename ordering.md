@@ -17,7 +17,7 @@ Preserving the order of attributes and entry codes can be very important for und
 The ordering overlay begins with the canonical ordering of OCA overlays.
 1) d (digest of the overlay)
 2) capture_base (capture base SAID the overlay is specific to)
-3) type (community/adc/ordering/1.0)
+3) type (community/overlays/adc/ordering/1.0)
 
 Next, the overlay contains ordering_attributes and ordering_entry_codes which are ordered lexicographically according to [3.2.3 Sorting of Object Properties](https://www.rfc-editor.org/rfc/rfc8785#section-3.2.3). 
 
@@ -28,7 +28,7 @@ Inside ordering_attributes is an array of attributes which are insertion ordered
 ```
 {
   "d": "#####Ordering_overlay_SAID####",
-  "type": "community/adc/ordering/1.0",
+  "type": "community/overlays/adc/ordering/1.0",
   "capture_base": "EK4blRtJ8S2_R0JVGPLTMtyHViNEUaby4SQ5aICyxUJz",
   "ordering_attribute": [
     "q1",
