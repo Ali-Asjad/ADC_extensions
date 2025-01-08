@@ -70,3 +70,4 @@ Inside ordering_attributes is an array of attributes which are insertion ordered
 - [OCA specification v1.0.1](http://oca.colossi.network/specification/) 
 - [3.2.3 Sorting of Object Properties](https://www.rfc-editor.org/rfc/rfc8785#section-3.2.3)
 - [CESR Specification](https://weboftrust.github.io/ietf-cesr/draft-ssmith-cesr.html) for SAID calculations
+- [OCA Package Standard](https://github.com/agrifooddatacanada/OCA_package_standard)
