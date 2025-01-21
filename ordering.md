@@ -19,32 +19,30 @@ The ordering overlay begins with the canonical ordering of OCA overlays.
 2) capture_base (capture base SAID the overlay is specific to)
 3) type (community/overlays/adc/ordering/1.0)
 
-Next, the overlay contains ordering_attributes and ordering_entry_codes which are ordered lexicographically according to [3.2.3 Sorting of Object Properties](https://www.rfc-editor.org/rfc/rfc8785#section-3.2.3). 
+Next, the overlay contains attributes_ordering and entry_code_ordering which are ordered lexicographically according to [3.2.3 Sorting of Object Properties](https://www.rfc-editor.org/rfc/rfc8785#section-3.2.3). 
 
-Inside ordering_attributes is an array of attributes which are insertion ordered. Inside ordering_entry_codes are attributes which are ordered lexicographically, with arrays of entry codes for each attribute which are insertion ordered.
+Inside attribute_ordering is an array of attributes which are insertion ordered. Inside entry_code_ordering are attributes which are ordered lexicographically, with arrays of entry codes for each attribute which are insertion ordered.
 
 **Example**: 
 
 ```
 {
-  "d": "#####Ordering_overlay_SAID####",
+  "d": "EFgKWDOmf5r_jEVNVFYR8M9h2p8TXo-RQrZUzfv8nK9h",
   "type": "community/overlays/adc/ordering/1.0",
-  "capture_base": "EK4blRtJ8S2_R0JVGPLTMtyHViNEUaby4SQ5aICyxUJz",
-  "ordering_attribute": [
-    "q1",
-    "q3",
-    "q4",
-    "q2"
+  "capture_base": "EBnF9U9XW1EqteIW0ucAR4CsTUqojvfIWkeifsLRuOUW",
+  "attribute_ordering": [
+    "i",
+    "d"
   ],
-  "ordering_entry_codes": {
-    "q1": [
+  "entry_code_ordering": {
+    "i": [
       "Google",
       "ISNI",
       "ORCiD",
       "ResearcherID",
       "Scopus"
     ],
-    "q4": [
+    "d": [
       "001",
       "002",
       "003",
