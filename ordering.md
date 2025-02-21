@@ -2,7 +2,7 @@
 
 **Community Grouping**: community/adc/extension/vXX
 
-**Authors**: Carly Huitema, Mathew Mozaffari
+**Authors**: Carly Huitema, Mathew Mozaffari, Steven Mugisha Mizero 
 
 **Date released**: 
 
@@ -27,28 +27,30 @@ Inside attribute_ordering is an array of attributes which are insertion ordered.
 
 ```
 {
-  "d": "EFgKWDOmf5r_jEVNVFYR8M9h2p8TXo-RQrZUzfv8nK9h",
-  "type": "community/overlays/adc/ordering/1.0",
-  "capture_base": "EBnF9U9XW1EqteIW0ucAR4CsTUqojvfIWkeifsLRuOUW",
-  "attribute_ordering": [
-    "i",
-    "d"
-  ],
-  "entry_code_ordering": {
-    "i": [
-      "Google",
-      "ISNI",
-      "ORCiD",
-      "ResearcherID",
-      "Scopus"
+  "ordering": {
+    "d": "EJkDEAtiYL8R4udU35f_4wjycpJWhc7LoL5r_5tvdh_g",
+    "type": "community/overlays/adc/ordering/1.0",
+    "capture_base": "EF70aJqYCa9cAHDaR7qTl_T-4PzdLX5Vq2bH-YvFxLnS",
+    "attribute_ordering": [
+      "identifier",
+      "colour"
     ],
-    "d": [
-      "001",
-      "002",
-      "003",
-      "004",
-      "005"
-    ]
+    "entry_code_ordering": {
+      "identifier": [
+        "ORCiD",
+        "ISNI",
+        "ResearcherID",
+        "Scopus",
+        "Google"
+      ],
+      "colour": [
+        "001",
+        "002",
+        "003",
+        "004",
+        "005"
+      ]
+    }
   }
 }
 ```
@@ -63,6 +65,9 @@ Inside attribute_ordering is an array of attributes which are insertion ordered.
 
 **Test case**: 
 
+```
+{"d":"EMofjM6x9h2u_tlrfr7rtRjx2D9QRR_BSOON36kIyIW3","type":"oca_package/1.0","oca_bundle":{"v":"OCAA11JSON000517_","bundle":{"v":"OCAS11JSON0004fa_","d":"EJQo7742IeTKxbfojVU5rlfTTjYR_0YBVwXd2AGvOFME","capture_base":{"d":"EF70aJqYCa9cAHDaR7qTl_T-4PzdLX5Vq2bH-YvFxLnS","type":"spec/capture_base/1.0","attributes":{"colour":"Text","identifier":"Text"},"classification":"","flagged_attributes":[]},"overlays":{"entry":[{"d":"EMmTvA5iZbHx8VVE29-SkZkuucR2qDIkEBtvKA_nDTwd","capture_base":"EF70aJqYCa9cAHDaR7qTl_T-4PzdLX5Vq2bH-YvFxLnS","type":"spec/overlays/entry/1.0","language":"eng","attribute_entries":{"colour":{"001":"Red","002":"Green","003":"Blue","004":"Yellow","005":"Orange"},"identifier":{"Google":"Google","ISNI":"ISNI","ORCiD":"ORCiD","ResearcherID":"ResearcherID","Scopus":"Scopus"}}}],"entry_code":{"d":"EMB_ZFw4xJ55wfl8rCVvRuMnN0TkDfOPlANRoMMdTw5z","capture_base":"EF70aJqYCa9cAHDaR7qTl_T-4PzdLX5Vq2bH-YvFxLnS","type":"spec/overlays/entry_code/1.0","attribute_entry_codes":{"colour":["001","002","003","004","005"],"identifier":["Google","ISNI","ORCiD","ResearcherID","Scopus"]}},"meta":[{"d":"ECSNfFTNMueiIipGRm9Hf1eNpW68Z14j77Ec5tmsK8OA","capture_base":"EF70aJqYCa9cAHDaR7qTl_T-4PzdLX5Vq2bH-YvFxLnS","type":"spec/overlays/meta/1.0","language":"eng","description":"A schema to demonstrate the attribute ordering and entry code ordering functionalities.","name":"Demonstration schema"}]}},"dependencies":[]},"extensions":[{"d":"EOHL6EPw73yl4XUfAGSO1mKrgp_SqjvkBpSv9M9Lfk9d","type":"community/adc/extension/1.0","bundle_digest":"EJQo7742IeTKxbfojVU5rlfTTjYR_0YBVwXd2AGvOFME","overlays":{"ordering":{"d":"EJkDEAtiYL8R4udU35f_4wjycpJWhc7LoL5r_5tvdh_g","type":"community/overlays/adc/ordering/1.0","capture_base":"EF70aJqYCa9cAHDaR7qTl_T-4PzdLX5Vq2bH-YvFxLnS","attribute_ordering":["identifier","colour"],"entry_code_ordering":{"identifier":["ORCiD","ISNI","ResearcherID","Scopus","Google"],"colour":["001","002","003","004","005"]}}}}]}
+```
 
 ## Normative references
 - [OCA specification v1.0.1](http://oca.colossi.network/specification/) 
