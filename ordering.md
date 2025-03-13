@@ -28,22 +28,16 @@ Inside attribute_ordering is an array of attributes which are insertion ordered.
 ```
 {
   "ordering": {
-    "d": "EJkDEAtiYL8R4udU35f_4wjycpJWhc7LoL5r_5tvdh_g",
-    "type": "community/overlays/adc/ordering/1.0",
-    "capture_base": "EF70aJqYCa9cAHDaR7qTl_T-4PzdLX5Vq2bH-YvFxLnS",
+    "d": "EEBJgB80IPnMrT55mFrq_Tw0-nhw5byWC8BzreDiaRrH",
+    "type": "community/overlays/adc/ordering/1.1",
+    "capture_base": "EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI",
     "attribute_ordering": [
-      "identifier",
-      "colour"
+      "v2",
+      "a1"
     ],
     "entry_code_ordering": {
-      "identifier": [
-        "ORCiD",
-        "ISNI",
-        "ResearcherID",
-        "Scopus",
-        "Google"
-      ],
-      "colour": [
+      "v2": [
+        "NA",
         "001",
         "002",
         "003",
@@ -66,7 +60,7 @@ Inside attribute_ordering is an array of attributes which are insertion ordered.
 **Test case**: 
 
 ```
-{"d":"EMofjM6x9h2u_tlrfr7rtRjx2D9QRR_BSOON36kIyIW3","type":"oca_package/1.0","oca_bundle":{"v":"OCAA11JSON000517_","bundle":{"v":"OCAS11JSON0004fa_","d":"EJQo7742IeTKxbfojVU5rlfTTjYR_0YBVwXd2AGvOFME","capture_base":{"d":"EF70aJqYCa9cAHDaR7qTl_T-4PzdLX5Vq2bH-YvFxLnS","type":"spec/capture_base/1.0","attributes":{"colour":"Text","identifier":"Text"},"classification":"","flagged_attributes":[]},"overlays":{"entry":[{"d":"EMmTvA5iZbHx8VVE29-SkZkuucR2qDIkEBtvKA_nDTwd","capture_base":"EF70aJqYCa9cAHDaR7qTl_T-4PzdLX5Vq2bH-YvFxLnS","type":"spec/overlays/entry/1.0","language":"eng","attribute_entries":{"colour":{"001":"Red","002":"Green","003":"Blue","004":"Yellow","005":"Orange"},"identifier":{"Google":"Google","ISNI":"ISNI","ORCiD":"ORCiD","ResearcherID":"ResearcherID","Scopus":"Scopus"}}}],"entry_code":{"d":"EMB_ZFw4xJ55wfl8rCVvRuMnN0TkDfOPlANRoMMdTw5z","capture_base":"EF70aJqYCa9cAHDaR7qTl_T-4PzdLX5Vq2bH-YvFxLnS","type":"spec/overlays/entry_code/1.0","attribute_entry_codes":{"colour":["001","002","003","004","005"],"identifier":["Google","ISNI","ORCiD","ResearcherID","Scopus"]}},"meta":[{"d":"ECSNfFTNMueiIipGRm9Hf1eNpW68Z14j77Ec5tmsK8OA","capture_base":"EF70aJqYCa9cAHDaR7qTl_T-4PzdLX5Vq2bH-YvFxLnS","type":"spec/overlays/meta/1.0","language":"eng","description":"A schema to demonstrate the attribute ordering and entry code ordering functionalities.","name":"Demonstration schema"}]}},"dependencies":[]},"extensions":[{"d":"EOHL6EPw73yl4XUfAGSO1mKrgp_SqjvkBpSv9M9Lfk9d","type":"community/adc/extension/1.0","bundle_digest":"EJQo7742IeTKxbfojVU5rlfTTjYR_0YBVwXd2AGvOFME","overlays":{"ordering":{"d":"EJkDEAtiYL8R4udU35f_4wjycpJWhc7LoL5r_5tvdh_g","type":"community/overlays/adc/ordering/1.0","capture_base":"EF70aJqYCa9cAHDaR7qTl_T-4PzdLX5Vq2bH-YvFxLnS","attribute_ordering":["identifier","colour"],"entry_code_ordering":{"identifier":["ORCiD","ISNI","ResearcherID","Scopus","Google"],"colour":["001","002","003","004","005"]}}}}]}
+{"d":"ENaWDe57kiHHJbVI3INLBx9d_vdqAJvxHnWk4q1q-dtc","type":"oca_package/1.0","oca_bundle":{"v":"OCAA11JSON00042e_","bundle":{"v":"OCAS11JSON000411_","d":"ECtL6yA8FwvWETaVkjq8v0mCKjs6GncqCq2aWW4_Rfqy","capture_base":{"d":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/capture_base/1.1","attributes":{"a1":"Text","v2":"Text"},"classification":"RDF107","flagged_attributes":[]},"overlays":{"entry":[{"d":"EKuwlJFpoc8NbKpmmYiCJsjZSE0zN6o2drjnlY_78_lO","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/overlays/entry/1.1","language":"eng","attribute_entries":{"v2":{"001":"Red","002":"Green","003":"Blue","004":"Yellow","005":"Orange","NA":"No answer"}}}],"entry_code":{"d":"EDZCxCzACYrbz5D_i_OjzRxMOcHU3MyypUnRwClevWws","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/overlays/entry_code/1.1","attribute_entry_codes":{"v2":["001","002","003","004","005","NA"]}},"meta":[{"d":"EDVqwR0-BBa0tiamgiiM8ygzsX_6BuzSFSdewmc8Bd3X","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/overlays/meta/1.1","language":"eng","description":"Example schema with two variables","name":"Example"}]}},"dependencies":[]},"extensions":[{"d":"EGCuetVgJ_TKs0BHyGzahaEG4Zp_N4rQ8taGdrDfWk87","type":"community/adc/extension/1.0","bundle_digest":"ECtL6yA8FwvWETaVkjq8v0mCKjs6GncqCq2aWW4_Rfqy","overlays":{"ordering":{"d":"EEBJgB80IPnMrT55mFrq_Tw0-nhw5byWC8BzreDiaRrH","type":"community/overlays/adc/ordering/1.1","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","attribute_ordering":["v2","a1"],"entry_code_ordering":{"v2":["NA","001","002","003","004","005"]}}}}]}
 ```
 
 ## Normative references
