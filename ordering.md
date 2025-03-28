@@ -1,4 +1,4 @@
-**Title**: Ordering by ADC - v1.1 - DRAFT
+**Title**: Ordering by ADC - v1.1
 
 **Community Grouping**: community/adc/extension/vXX
 
