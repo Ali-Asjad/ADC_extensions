@@ -28,21 +28,20 @@ Inside attribute_ordering is an array of attributes which are insertion ordered.
 ```
 {
   "ordering": {
-    "d": "EEBJgB80IPnMrT55mFrq_Tw0-nhw5byWC8BzreDiaRrH",
+    "d": "EIgpxNWCWODA1_q5psu7r3mCURHDt_5bV0c_1UtfyKf_",
     "type": "community/overlays/adc/ordering/1.1",
-    "capture_base": "EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI",
     "attribute_ordering": [
-      "v2",
-      "a1"
+      "a1",
+      "v2"
     ],
     "entry_code_ordering": {
       "v2": [
-        "NA",
         "001",
         "002",
         "003",
         "004",
-        "005"
+        "005",
+        "NA"
       ]
     }
   }
@@ -60,7 +59,7 @@ Inside attribute_ordering is an array of attributes which are insertion ordered.
 **Test case**: 
 
 ```
-{"d":"ENaWDe57kiHHJbVI3INLBx9d_vdqAJvxHnWk4q1q-dtc","type":"oca_package/1.0","oca_bundle":{"v":"OCAA11JSON00042e_","bundle":{"v":"OCAS11JSON000411_","d":"ECtL6yA8FwvWETaVkjq8v0mCKjs6GncqCq2aWW4_Rfqy","capture_base":{"d":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/capture_base/1.1","attributes":{"a1":"Text","v2":"Text"},"classification":"RDF107","flagged_attributes":[]},"overlays":{"entry":[{"d":"EKuwlJFpoc8NbKpmmYiCJsjZSE0zN6o2drjnlY_78_lO","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/overlays/entry/1.1","language":"eng","attribute_entries":{"v2":{"001":"Red","002":"Green","003":"Blue","004":"Yellow","005":"Orange","NA":"No answer"}}}],"entry_code":{"d":"EDZCxCzACYrbz5D_i_OjzRxMOcHU3MyypUnRwClevWws","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/overlays/entry_code/1.1","attribute_entry_codes":{"v2":["001","002","003","004","005","NA"]}},"meta":[{"d":"EDVqwR0-BBa0tiamgiiM8ygzsX_6BuzSFSdewmc8Bd3X","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/overlays/meta/1.1","language":"eng","description":"Example schema with two variables","name":"Example"}]}},"dependencies":[]},"extensions":[{"d":"EGCuetVgJ_TKs0BHyGzahaEG4Zp_N4rQ8taGdrDfWk87","type":"community/adc/extension/1.0","bundle_digest":"ECtL6yA8FwvWETaVkjq8v0mCKjs6GncqCq2aWW4_Rfqy","overlays":{"ordering":{"d":"EEBJgB80IPnMrT55mFrq_Tw0-nhw5byWC8BzreDiaRrH","type":"community/overlays/adc/ordering/1.1","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","attribute_ordering":["v2","a1"],"entry_code_ordering":{"v2":["NA","001","002","003","004","005"]}}}}]}
+{"d":"EM9CIbZicohd0BlA9wS_knU70_2b3p3TCmh43t5OhAY_","type":"oca_package/1.0","oca_bundle":{"v":"OCAA11JSON00042e_","bundle":{"v":"OCAS11JSON000411_","d":"ECtL6yA8FwvWETaVkjq8v0mCKjs6GncqCq2aWW4_Rfqy","capture_base":{"d":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/capture_base/1.1","attributes":{"a1":"Text","v2":"Text"},"classification":"RDF107","flagged_attributes":[]},"overlays":{"entry":[{"d":"EKuwlJFpoc8NbKpmmYiCJsjZSE0zN6o2drjnlY_78_lO","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/overlays/entry/1.1","language":"eng","attribute_entries":{"v2":{"001":"Red","002":"Green","003":"Blue","004":"Yellow","005":"Orange","NA":"No answer"}}}],"entry_code":{"d":"EDZCxCzACYrbz5D_i_OjzRxMOcHU3MyypUnRwClevWws","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/overlays/entry_code/1.1","attribute_entry_codes":{"v2":["001","002","003","004","005","NA"]}},"meta":[{"d":"EDVqwR0-BBa0tiamgiiM8ygzsX_6BuzSFSdewmc8Bd3X","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/overlays/meta/1.1","language":"eng","description":"Example schema with two variables","name":"Example"}]}},"dependencies":[]},"extensions":{"adc":{"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI":{"d":"EKwZ2djbS1pvfvwPVIccoywLR3HIMPBd7zPIlaHHYyaJ","type":"community/adc/extension/1.0","overlays":{"ordering":{"d":"EIgpxNWCWODA1_q5psu7r3mCURHDt_5bV0c_1UtfyKf_","type":"community/overlays/adc/ordering/1.1","attribute_ordering":["a1","v2"],"entry_code_ordering":{"v2":["001","002","003","004","005","NA"]}}}}}}}
 ```
 
 ## Normative references
