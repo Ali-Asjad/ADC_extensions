@@ -2,7 +2,7 @@
 
 **Community Grouping**: community/adc/extension/vXX
 
-**Authors**: Carly Huitema, Paul Knowles, Ryan Bartelette
+**Authors**: Carly Huitema, Paul Knowles, Ryan Barrett
 
 **Date released**: 
 
