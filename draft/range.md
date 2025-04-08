@@ -2,7 +2,7 @@
 
 **Community Grouping**: community/adc/extension/vXX
 
-**Authors**: Carly Huitema, 
+**Authors**: Carly Huitema, Paul Knowles, Ryan Bartelette
 
 **Date released**: 
 
@@ -10,40 +10,36 @@ This overlay follows official OCA Package requirements documented at [https://gi
 
 **Description**:
 
-Preserving the order of attributes and entry codes can be very important for understanding data and for data entry and display. This overlay lets creators specify the ordering of attributes and entry codes of a specific schema bundle.
+This overlay adds minimum and maximum values (inclusive or exclusive) for attributes with either numeric or date/time datatypes.
 
 **Canonicalization Rules**:
 
 The ordering overlay begins with the canonical ordering of OCA overlays.
 1) d (digest of the overlay)
 2) capture_base (capture base SAID the overlay is specific to)
-3) type (community/overlays/adc/ordering/1.0)
+3) type (community/overlays/adc/range/1.1)
 
-Next, the overlay contains attributes_ordering and entry_code_ordering which are ordered lexicographically according to [3.2.3 Sorting of Object Properties](https://www.rfc-editor.org/rfc/rfc8785#section-3.2.3). 
-
-Inside attribute_ordering is an array of attributes which are insertion ordered. Inside entry_code_ordering are attributes which are ordered lexicographically, with arrays of entry codes for each attribute which are insertion ordered.
+Then there objects with the name of each attribute which are lexicographically ordered and the contents of each attribute named object are also lexicographically ordered.
 
 **Example**: 
 
 ```
 {
-  "ordering": {
-    "d": "EEBJgB80IPnMrT55mFrq_Tw0-nhw5byWC8BzreDiaRrH",
-    "type": "community/overlays/adc/ordering/1.1",
-    "capture_base": "EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI",
-    "attribute_ordering": [
-      "v2",
-      "a1"
-    ],
-    "entry_code_ordering": {
-      "v2": [
-        "NA",
-        "001",
-        "002",
-        "003",
-        "004",
-        "005"
-      ]
+  "digest": "EXAMPLE_DIGEST_PLACEHOLDER",
+  "capture_base": "EXAMPLE_CAPTURE_BASE_SAID",
+  "type": "community/overlays/adc/range/1.1",
+  "attribute_ranges": {
+    "v1": {
+      "lower": "0",
+      "lower_inclusive": true,
+      "upper": "100",
+      "upper_inclusive": true
+    },
+    "v2": {
+      "lower": "2008-09-01",
+      "lower_inclusive": true,
+      "upper": "2009-09-01",
+      "upper_inclusive": false
     }
   }
 }
@@ -51,16 +47,17 @@ Inside attribute_ordering is an array of attributes which are insertion ordered.
 
 
 **Rules summary**: 
- - Every attribute present in this overlay MUST be present in the capture_base of the source schema.
- - Each entry code present in this overlay MUST be present in the entry overlay of the source schema.
- - Each attribute MUST appear at most once, and MAY appear zero times.
- - Each entry code (in an entry code set) MUST appear at most once, and MAY appear zero times.
+- Only attributes with datatype Numeric or DateTime MAY have a range value
+- A Numeric or DateTime datatype attribute MAY have a lower bound, an upper bound, or both
+- If a lower and/or upper bound is given it MUST also include the appropriate lower_inclusive or upper_inclusive value which MUST be either true or false.
+- The lower value MUST be lower than the upper value
+- The format of the lower and upper values MUST match the format overlay
 
 
 **Test case**: 
 
 ```
-{"d":"ENaWDe57kiHHJbVI3INLBx9d_vdqAJvxHnWk4q1q-dtc","type":"oca_package/1.0","oca_bundle":{"v":"OCAA11JSON00042e_","bundle":{"v":"OCAS11JSON000411_","d":"ECtL6yA8FwvWETaVkjq8v0mCKjs6GncqCq2aWW4_Rfqy","capture_base":{"d":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/capture_base/1.1","attributes":{"a1":"Text","v2":"Text"},"classification":"RDF107","flagged_attributes":[]},"overlays":{"entry":[{"d":"EKuwlJFpoc8NbKpmmYiCJsjZSE0zN6o2drjnlY_78_lO","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/overlays/entry/1.1","language":"eng","attribute_entries":{"v2":{"001":"Red","002":"Green","003":"Blue","004":"Yellow","005":"Orange","NA":"No answer"}}}],"entry_code":{"d":"EDZCxCzACYrbz5D_i_OjzRxMOcHU3MyypUnRwClevWws","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/overlays/entry_code/1.1","attribute_entry_codes":{"v2":["001","002","003","004","005","NA"]}},"meta":[{"d":"EDVqwR0-BBa0tiamgiiM8ygzsX_6BuzSFSdewmc8Bd3X","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/overlays/meta/1.1","language":"eng","description":"Example schema with two variables","name":"Example"}]}},"dependencies":[]},"extensions":[{"d":"EGCuetVgJ_TKs0BHyGzahaEG4Zp_N4rQ8taGdrDfWk87","type":"community/adc/extension/1.0","bundle_digest":"ECtL6yA8FwvWETaVkjq8v0mCKjs6GncqCq2aWW4_Rfqy","overlays":{"ordering":{"d":"EEBJgB80IPnMrT55mFrq_Tw0-nhw5byWC8BzreDiaRrH","type":"community/overlays/adc/ordering/1.1","capture_base":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","attribute_ordering":["v2","a1"],"entry_code_ordering":{"v2":["NA","001","002","003","004","005"]}}}}]}
+
 ```
 
 ## Normative references
