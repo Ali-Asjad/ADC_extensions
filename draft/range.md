@@ -24,7 +24,7 @@ Then there objects with the name of each attribute which are lexicographically o
 **Example**: 
 
 ```
-{
+"range":{
   "digest": "EXAMPLE_DIGEST_PLACEHOLDER",
   "capture_base": "EXAMPLE_CAPTURE_BASE_SAID",
   "type": "community/overlays/adc/range/1.1",
