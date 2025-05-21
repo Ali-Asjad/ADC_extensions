@@ -126,7 +126,7 @@ In the attribute framing overlay, for each attribute (which must be unique in th
 For each attribute there can only be one skos:exactMatch, but there may be additional framing terms for the same attribute (e.g. skos:closeMatch). Unlike attribute to attribute mapping, attribute to concept mapping can be one to many with different levels of matching (e.g. different skos terms). See example below (albumin concentration).
 
 ```
-{
+"attribute_framing":{
   "capture_base": "Etszl9LgLUjllI950rd2lO6rF5-BP_jGzXGBPkFZCZFA",
   "digest": "XXXX",
   "type": "spec/overlays/attribute_framing/1.0",
@@ -163,7 +163,7 @@ There can be multiple unit framing overlays within a single bundle, one for each
 For each unique unit that appears in the schema there can be only one unit_framing term. This term must be skos:exactMatch and only skos:exactMatch is allowed (no other skos terms). This is because units are often associated with quantitative data and it is necessary to preserve accuracy and to use units reported to transform data.
 
 ```
-{
+"unit_framing":{
   "capture_base": "Etszl9LgLUjllI950rd2lO6rF5-BP_jGzXGBPkFZCZFA",
   "digest": "XXXX",
   "type": "spec/overlays/unit_framing/1.0",
@@ -189,7 +189,7 @@ There can be multiple entry code framing overlays within a single bundle, one fo
 For each entry code of each attribute there can only be one skos:exactMatch, but there may be additional framing terms for the same entry code (e.g. skos:closeMatch).
 
 ```
-{
+"entry_code_framing":{
   "capture_base": "Etszl9LgLUjllI950rd2lO6rF5-BP_jGzXGBPkFZCZFA",
   "digest": "XXXXX",
   "type": "spec/overlays/entry_code_framing/1.0",
