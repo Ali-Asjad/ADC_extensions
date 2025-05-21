@@ -38,8 +38,8 @@ Then there is the sensitive_attributes object with an array of sensitive attribu
 
 
 **Rules summary**: 
-- only attributes which are listed in the capture base can appear in the sensitive overlay.
-- 
+- Only attributes which are listed in the capture base can appear in the sensitive overlay.
+- Attributes can appear only once in the sensitive_attributes array.
 
 
 **Test case**: 
