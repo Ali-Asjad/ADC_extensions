@@ -26,7 +26,7 @@ Inside attribute_ordering is an array of attributes which are insertion ordered.
 **Example**: 
 
 ```
-{
+"ordering":{
   "d": "EN8QvvPSwCtwbRC5VhIfgVwxeiFXVyr6NeMrx55GQEQW",
   "type": "community/overlays/adc/ordering/1.1",
   "attribute_ordering": [
