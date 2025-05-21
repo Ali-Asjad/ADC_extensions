@@ -24,7 +24,7 @@ Then there objects with the name of each attribute which are lexicographically o
 **Example**: ??? (are these still up to date?)
 
 ```
-{
+"example":{
   "capture_base": "Etszl9LgLUjllI950rd2lO6rF5-BP_jGzXGBPkFZCZFA",
   "digest": "XXXX",
   "type": "spec/overlays/example/1.0",
