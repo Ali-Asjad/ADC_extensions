@@ -17,14 +17,14 @@ This overlay corrects for the missing sensitive (aka flagged) attributes that we
 The ordering overlay begins with the canonical ordering of OCA overlays.
 1) d (digest of the overlay)
 2) capture_base (capture base SAID the overlay is specific to)
-3) type (community/overlays/adc/range/1.1)
+3) type (community/overlays/adc/sensitive/1.1)
 
 Then there is the sensitive_attributes object with an array of sensitive attributes in lexicographical order.
 
 **Example**: 
 
 ```
-{
+"sensitive":{
   "d": "EAgeUSa7JMG9oxJHUKTEBz4chJLWE5ayTq2rvBHo_P5R",
   "type": "community/overlays/adc/sensitive/1.1",
   "sensitive_attributes": [
