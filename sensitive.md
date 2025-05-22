@@ -4,7 +4,7 @@
 
 **Authors**: Steven Mugisha Mizero, Carly Huitema
 
-**Date released**: May 15, 2025
+**Date released**: 15-05-2025
 
 This overlay follows official OCA Package requirements documented at [https://github.com/agrifooddatacanada/OCA_package_standard](https://github.com/agrifooddatacanada/OCA_package_standard)
 
