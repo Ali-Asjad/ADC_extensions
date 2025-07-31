@@ -18,10 +18,10 @@ In OCA, three types of information are contextually framed:
 
 **Canonicalization Rules**:
 
-The framing overlays begins with the canonical ordering of ADC extension overlays.
+The framing overlays begins with the canonical ordering of [extension overlays](https://github.com/agrifooddatacanada/OCA_package_standard/tree/fix/key_values_requirements?tab=readme-ov-file#oca-package-syntax-requirements).
 
 1. `d` (digest of the overlay)
-2. `type` (community/overlay/adc/framing/1.1)
+2. `type` (community/overlay/adc/framing_overlay_type/1.1) where `framing_overlay_type` is one of `attribute_framing`, `unit_framing`, or `entry_code_framing`.
 3. overlay properties (e.g. `attribute_framing`, `unit_framing`, `entry_code_framing`) and their conanicalization rules are defined in their respective overlays section.
 
 **Example**:
@@ -96,9 +96,9 @@ The framing overlays begins with the canonical ordering of ADC extension overlay
 
 ```
 
-### Framing Overlays and Relationships
+#### Framing Overlays and Relationships
 
-To describe the framing relationship between OCA schema objects and external concepts, the [Simple Standard for Sharing Ontological Mappings](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9216545/) (SSSOM) [1](<(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9216545/)>) is used.
+To describe the framing relationship between OCA schema objects and external concepts, the [Simple Standard for Sharing Ontological Mappings](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9216545/) (SSSOM) is used.
 
 Only the four required SSSOM metadata elements are utilized:
 
@@ -119,16 +119,19 @@ With this after after adding the `d` and `type`,`framing_metadata` MUST follow.
 // the structure of framing metadata
 
 "framing_metadata": {
-    "frame_id": "SNOMEDCT", // Identifier of resource (SAIDs, DOIs, PURLs, or common names e.g. UCUM)
-    "frame_label": "Systematized Nomenclature of Medicine Clinical Terms", // Label of resource (e.g. Unified Code for Units of Measure)
-    "frame_location": "https://bioportal.bioontology.org/ontologies/SNOMEDCT", // Location of resource (e.g. https://ucum.org/)
-    "frame_version": "2023AA" // Resource version (e.g. 2.1).
+    "id": "SNOMEDCT", // Identifier of resource (SAIDs, DOIs, PURLs, or common names e.g. UCUM)
+    "label": "Systematized Nomenclature of Medicine Clinical Terms", // Label of resource (e.g. Unified Code for Units of Measure)
+    "location": "https://bioportal.bioontology.org/ontologies/SNOMEDCT", // Location of resource (e.g. https://ucum.org/)
+    "version": "2023AA" // Resource version (e.g. 2.1).
   },
 ```
 
 **Attribute framing overlay example**
 
 ```
+
+// canonicalization rules: d, type, framing_metadata, attributes
+
 "attribute_framing":{
   "d": "XXXX",
   "type": "spec/overlays/attribute_framing/1.1",
@@ -161,6 +164,9 @@ With this after after adding the `d` and `type`,`framing_metadata` MUST follow.
 **Unit framing overlay example**
 
 ```
+
+// canonicalization rules: d, type, framing_metadata, units
+
 "unit_framing":{
   "d": "XXXX",
   "type": "spec/overlays/unit_framing/1.1",
@@ -183,6 +189,9 @@ With this after after adding the `d` and `type`,`framing_metadata` MUST follow.
 **Entry code framing overlay example**
 
 ```
+
+// canonicalization rules: d, type, framing_metadata, entry_codes
+
 "entry_code_framing":{
   "d": "XXXXX",
   "type": "spec/overlays/entry_code_framing/1.1",
@@ -224,35 +233,33 @@ With this after after adding the `d` and `type`,`framing_metadata` MUST follow.
 }
 ```
 
-## Reference
+### Rules summary for framing overlays
 
-### Rules for framing overlays
-
-- For each framing overlay there must be a frame_id
-- Within each overlay framing type (attribute, unit or entry_code) each frame_id must be unique.
+- For each framing overlay there must be a `frame id`.
+- Within each overlay framing type (attribute, unit or entry_code) each `frame id` must be unique.
 - Not every term must be framed
-- For each attribute or entry_code framing there can be only one skos:exactMatch per term.
-  - Refer to Unresolved Questions for discussion on if other ontologies can be used for framing (e.g. owl:sameAs)
+- For each attribute or entry_code framing there can be only one `skos:exactMatch` per term.
 - For unit framing, each unit used in a schema can be framed only once.
-- For unit framing, each unit can only be framed using skos:exactMatch
-  - Refer to Unresolved Questions for discussion on if other ontologies can be used for framing (e.g. owl:sameAs)
+- For unit framing, each unit can only be framed using `skos:exactMatch`
 
-### Predicate_id
+**Predicate_id**
 
-Recommended to use skos terms for the mapping vocabulary (although other mapping schemas would be supported such as owl:)
-|Skos term|Description|
-|---|---|
-|skos:closeMatch|closeMatch is used to link two concepts that are sufficiently similar that they can be used interchangeably in some information retrieval applications. In order to avoid the possibility of "compound errors" when combining mappings across more than two concept schemes, skos:closeMatch is not declared to be a transitive property.|
-|skos:exactMatch|exactMatch is used to link two concepts, indicating a high degree of confidence that the concepts can be used interchangeably across a wide range of information retrieval applications. skos:exactMatch is a transitive property, and is a sub-property of skos:closeMatch.|
-|skos:broadMatch|<A> skos:broadMatch <B> where B is broader than A. broadMatch is used to state an associative mapping link between two concepts.|
-|skos:narrowMatch|<A> skos:narrowMatch <B> where B is narrower than A. skos:narrowMatch is owl:inverseOf the property skos:broadMatch.|
-|skos:relatedMatch|relatedMatch is used to state an associative mapping link between two concepts.|
+The `predicate_id` MUST be a `skos` term for describing the relatioship between the `subject_id` and `object_id`.
+
+| Skos term         | Description                                                                                                                                                                                                                                                                                                                               |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| skos:closeMatch   | closeMatch is used to link two concepts that are sufficiently similar that they can be used interchangeably in some information retrieval applications. In order to avoid the possibility of "compound errors" when combining mappings across more than two concept schemes, skos:closeMatch is not declared to be a transitive property. |
+| skos:exactMatch   | exactMatch is used to link two concepts, indicating a high degree of confidence that the concepts can be used interchangeably across a wide range of information retrieval applications. skos:exactMatch is a transitive property, and is a sub-property of skos:closeMatch.                                                              |
+| skos:broadMatch   | <A> skos:broadMatch <B> where B is broader than A. broadMatch is used to state an associative mapping link between two concepts.                                                                                                                                                                                                          |
+| skos:narrowMatch  | <A> skos:narrowMatch <B> where B is narrower than A. skos:narrowMatch is owl:inverseOf the property skos:broadMatch.                                                                                                                                                                                                                      |
+| skos:relatedMatch | relatedMatch is used to state an associative mapping link between two concepts.                                                                                                                                                                                                                                                           |
 
 Source: [SKOS mapping vocabulary](https://www.w3.org/TR/skos-reference/#mapping)
 
-### Framing_justification
+**Framing_justification**
 
-Recommended to use the semapv terms for framing justification although other justification schemas would be supported.
+The `framing_justification` MUST be a `semapv` term for describing the justification for the relationship between the `subject_id` and `object_id`.
+
 |Semapv term|Description|
 |---|---|
 |semapv:MappingReview|A process that is concerned with determining if a mapping candidate (otherwise determined) is reasonable/correct.|
@@ -267,20 +274,12 @@ Recommended to use the semapv terms for framing justification although other jus
 
 Source: SEMAPV: [A Vocabulary for Semantic Mappings](https://github.com/mapping-commons/semantic-mapping-vocabulary) and [use in SSSOM](https://mapping-commons.github.io/sssom/mapping_justification/)
 
-**Canonicalization Rules**:
-
-**Example**:
-
-```
-
-```
-
-**Rules summary**:
-
 **Test case**:
 
-```
+Unit Framing Overaly
 
+```
+{"d":"EME1KjyGWqp25U_1snb5kCN7KLIDe5UBae4czFYYXOq-","type":"oca_package/1.0","oca_bundle":{"v":"OCAA11JSON0004a4_","bundle":{"v":"OCAS11JSON000487_","d":"EFPGBEwn5Hzl9Cbx1r9Od54IwhkqJXc3vE4Jm7mjvHy2","capture_base":{"d":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/capture_base/1.1","attributes":{"age":"Text","height":"Text","languages":"Text"},"classification":"","flagged_attributes":[]},"overlays":{"entry":[{"d":"EPF1_UJBIUow7nhkWxZKBazHvPRPtSw23C2A551KP0Iw","capture_base":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/overlays/entry/1.1","language":"eng","attribute_entries":{"languages":{"eng":"English","fra":"Français"}}}],"entry_code":{"d":"EH3-TrXb_zsql5SLdTIGBjZcwBkiEZ8CXEpQT4FPS-XD","capture_base":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/overlays/entry_code/1.1","attribute_entry_codes":{"languages":["eng","fra"]}},"meta":[{"d":"EP-ER88GMUXIrkk9hhF8z0IS3ji1l2mYjAXwCI-0Y06S","capture_base":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/overlays/meta/1.1","language":"eng","description":"Athlete","name":"Cricket"}],"unit":{"d":"EGGyEF22FXecJq9ShCxJcn0cBLHrNLyXEW4GrZm6ivcy","capture_base":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/overlays/unit/1.1","attribute_unit":{"height":"kg"}}}},"dependencies":[]},"extensions":{"adc":{"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l":{"d":"EMB8WpIeu78Gdbq9pgJ9gOJmwW5pq13TLvLOQPuqxHvR","type":"community/adc/extension/1.0","overlays":{"example":[{"d":"EIue3pCTsb60lSFkc6H71Y9zFe8R40pCuSoHJWVqP3gs","type":"community/overlays/adc/example/1.1","language":"ar","attribute_examples":{"Albumin_concentration":["52.69"],"Glucose_concentration":["8.7"],"Sample_name":["عينة"],"Sample_type":["BLD003"]}},{"d":"EKVqonNv_5Z0r0yu8tan_6lI2Bohu1cP2nSF4eE6uFPz","type":"community/overlays/adc/example/1.1","language":"eng","attribute_examples":{"Albumin_concentration":["52.69"],"Glucose_concentration":["8.7"],"Sample _name":["Carlys_sample"],"Sample_type":["BLD003"]}}],"ordering":{"d":"EDvp_MElDjSTw1nLpnKDQGsf0T3RO8L3Iaox5x0raQBZ","type":"community/overlays/adc/ordering/1.1","attribute_ordering":["age","height","languages"],"entry_code_ordering":{"languages":{"languages":["eng","fra"]}}},"range":{"d":"EJaUhjByzOY7joq5iMIJ4BcG62Ju73IMzmw70wNLBR_u","type":"community/overlays/adc/range/1.1","attributes":{"age":{"lower":"0","lower_inclusive":true,"upper":"100","upper_inclusive":true},"height":{"lower":"0","lower_inclusive":true,"upper":"300","upper_inclusive":false}}},"sensitive":{"d":"EO8ftlqoiGmbsATLr9TAxUaE8a0bRrWpM2shXwszqLG6","type":"community/overlays/adc/sensitive/1.1","sensitive_attributes":["age"]},"unit_framing":{"d":"EObBElHhoeff-oJx_bCQfav4qOZ3RCwFH7xdqzQx1qB7","type":"community/overlays/adc/unit_framing/1.1","framing_metadata":{"id":"UCUM","label":"","location":"","version":""},"units":{"kg":{"framing_justification":"semapv:ManualMappingCuration","predicate_id":"skos:exactMatch","term_id":"kg"}}}}}}}}
 ```
 
 ## Normative references
