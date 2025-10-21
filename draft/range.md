@@ -24,25 +24,24 @@ Then there objects with the name of each attribute which are lexicographically o
 **Example**: 
 
 ```
-"range":{
-  "digest": "EXAMPLE_DIGEST_PLACEHOLDER",
-  "capture_base": "EXAMPLE_CAPTURE_BASE_SAID",
-  "type": "community/overlays/adc/range/1.1",
-  "attribute_ranges": {
-    "v1": {
-      "lower": "0",
-      "lower_inclusive": true,
-      "upper": "100",
-      "upper_inclusive": true
-    },
-    "v2": {
-      "lower": "2008-09-01",
-      "lower_inclusive": true,
-      "upper": "2009-09-01",
-      "upper_inclusive": false
-    }
-  }
-}
+"range": {
+            "d": "EMta65hl_7m-_1Arw_xDsLm5Ac1c-gFiTLxnXE8Ck46D",
+            "type": "community/overlays/adc/range/1.1",
+            "attributes": {
+              "attr_1": {
+                "lower": "10",
+                "lower_inclusive": true,
+                "upper": "20",
+                "upper_inclusive": true
+              },
+              "attr_2": {
+                "lower": "2000-05-11",
+                "lower_inclusive": true,
+                "upper": "2005-05-11",
+                "upper_inclusive": false
+              }
+            }
+          }
 ```
 
 
