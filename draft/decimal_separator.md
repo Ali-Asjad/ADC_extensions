@@ -24,9 +24,7 @@ The decimal separator overlay begins with the canonical ordering of OCA overlays
 2) capture_base (capture base SAID the overlay is specific to)
 3) type (community/overlays/adc/decimal_separator/1.1)
 
-Next, the overlay contains `attribute_decimal_separator` and `default_separator` which are ordered lexicographically according to [3.2.3 Sorting of Object Properties](https://www.rfc-editor.org/rfc/rfc8785#section-3.2.3).
-
-Inside `attribute_decimal_separator` the attribute names are ordered lexicographically. The values are simple strings and do not require further ordering.
+Next, the overlay contains `default_separator`.
 
 **Example**:
 
@@ -44,11 +42,6 @@ The following is an example of a canonicalized overlay object. The `d` value is 
 **Rules summary**:
 
 - `decimal_separator` MUST be present and MUST be either "." or ",".
-<!-- - `attribute_decimal_separator` MAY be present.
-- Every attribute present in `attribute_decimal_separator` MUST be present in the capture_base of the source schema.
-- Each attribute MUST appear at most once in `attribute_decimal_separator`.
-- Each value in `attribute_decimal_separator` MUST be either "." or ",".
-- When an attribute has an entry in `attribute_decimal_separator`, that value MUST override `default_separator` for that attribute. -->
 - This overlay MUST NOT change the underlying numeric semantics; it only informs display, entry, and parsing behavior.
 
 **Test case**:
