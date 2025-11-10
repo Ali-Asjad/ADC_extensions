@@ -28,15 +28,7 @@ The Form overlay enables the creation of structured, user-friendly data collecti
 The ordering overlay begins with the canonical ordering of OCA overlays.
 1) d (digest of the overlay)
 2) capture_base (capture base SAID the overlay is specific to)
-3) type (community/overlays/adc/ordering/1.0)
-4) language (Three-letter ISO 639-2 language code)
-5) pages (Array of page structures)
-6) page_order (Array of page identifiers)
-7) page_labels (Object mapping identifiers to labels)
-8) sidebar_label (Object mapping page identifiers to sidebar labels)
-9) description (Object mapping identifiers/attributes to descriptions)
-10) title (Form title string or empty string)
-11) interaction (Array containing interaction configurations)
+3) type (community/overlays/adc/form/1.0)
 
 Next, the Form overlay enforces strict structural and serialization rules to ensure consistency across languages and implementations. All object properties and identifiers must be alphabetically or lexicographically ordered, according to [3.2.3 Sorting of Object Properties](https://www.rfc-editor.org/rfc/rfc8785#section-3.2.3), while arrays follow the intended display sequence.
 
