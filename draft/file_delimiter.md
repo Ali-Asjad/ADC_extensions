@@ -16,7 +16,6 @@ This overlay works alongside other presentation/formatting overlays. For example
 
 Keys defined by this overlay:
 - `delimiter` (string, REQUIRED): The single-character field delimiter used between values. Allowed examples include ",", ";", "\t" (tab), and "|". Custom single-character Unicode delimiters are allowed; the value MUST represent exactly one Unicode code point in JSON string form.
-- `encoding` (string, REQUIRED): The character encoding name for serialized files (e.g., "UTF-8", "UTF-16LE", "ISO-8859-1", "Windows-1252"). Producers and consumers SHOULD use IANA "Character Sets" names.
 - `data_start_row` (integer, OPTIONAL): The 1-based row index at which data rows begin. MUST be a positive integer. Row counting starts at 1. For example, `2` indicates that the data begins on row 2.
 - `quote_char` (string, OPTIONAL): Character used to quote fields, default is `"` (double quote) if omitted.
 - `escape_char` (string, OPTIONAL): Character used to escape `quote_char` inside quoted fields. If omitted, defaults to the same value as `quote_char`.
