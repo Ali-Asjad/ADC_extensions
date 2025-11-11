@@ -29,19 +29,15 @@ The file_delimiter overlay begins with the canonical ordering of OCA overlays.
 1) d (digest of the overlay)
 2) capture_base (capture base SAID the overlay is specific to)
 3) type (community/overlays/adc/file_delimiter/1.1)
-4) delimiter (string)
-5) escape_char (string) (optional)
-6) data_start_row (integer) (optional)
-7) line_terminator (string) (optional)
-8) quote_char (string) (optional)
 
-Object properties MUST follow [3.2.3 Sorting of Object Properties](https://www.rfc-editor.org/rfc/rfc8785#section-3.2.3). Arrays, if present, are insertion ordered. For SAID generation, JSON MUST be serialized in a fully compact form with no extraneous whitespace.
+All other objects present follow the first three keys and MUST follow [3.2.3 Sorting of Object Properties](https://www.rfc-editor.org/rfc/rfc8785#section-3.2.3). Arrays, if present, are insertion ordered. For SAID generation, JSON MUST be serialized in a fully compact form with no extraneous whitespace.
 
 **Example**:
 
 The following is a canonicalized overlay object. The SAID values are illustrative.
 
 ```
+FIX THIS LATER AFTER CODING
 "file_delimiter": {
   "d": "EG3oB8w6wJ7wQm3m5k5tGzj5n2mK3D0tq8qg3lH8s9cY",
   "capture_base": "EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI",
