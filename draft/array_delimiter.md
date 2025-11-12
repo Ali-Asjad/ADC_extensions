@@ -19,7 +19,7 @@ Keys defined by this overlay:
 - `attributes` (object, OPTIONAL): Per-attribute overrides, keyed by attribute name. Each value is an object supporting:
   - `delimiter` (string, OPTIONAL): Attribute-specific array delimiter; same single-code-point requirement.
   - `element_quote_char` (string, OPTIONAL): Character used to quote individual array elements, default `"` if omitted.
-  - `element_escape_char` (string, OPTIONAL): Character used to escape `element_quote_char` within an element. Defaults to the same value as `element_quote_char` if omitted.
+  - `element_escape_char` (string, OPTIONAL): Character used to escape `element_quote_char` within an element. Defaults to `\` if omitted.
   - `trim_whitespace` (boolean, OPTIONAL): If true, leading/trailing ASCII whitespace around unquoted elements SHOULD be trimmed during parse and SHOULD NOT be added during generation.
   - `allow_empty_elements` (boolean, OPTIONAL): If true, empty elements between adjacent delimiters are permitted and must be preserved in round-trip.
 
@@ -51,7 +51,7 @@ The following is a canonicalized overlay object. SAID values are illustrative.
     "tags": {
       "delimiter": "|",
       "element_quote_char": "\"",
-      "element_escape_char": "\"",
+      "element_escape_char": "\\",
       "trim_whitespace": true,
       "allow_empty_elements": false
     }
@@ -64,7 +64,8 @@ The following is a canonicalized overlay object. SAID values are illustrative.
 
 - `delimiter` MUST be present and MUST represent exactly one Unicode code point as a JSON string.
 - `attributes` MAY provide per-attribute overrides; attribute names MUST exist in the capture_base.
-- If `element_quote_char` is omitted, it defaults to `"`. If `element_escape_char` is omitted, it defaults to `element_quote_char`.
+- If `element_quote_char` is omitted, it defaults to `"`. 
+- If `element_escape_char` is omitted, it defaults to `\`.
 - If `trim_whitespace` is true, implementations SHOULD trim only when elements are not quoted.
 - If `allow_empty_elements` is true, adjacent delimiters represent empty elements and MUST be preserved in parse and generation.
 - The array delimiter SHOULD NOT be the same as the file (field) delimiter unless quoting/escaping renders parsing unambiguous.
@@ -75,7 +76,7 @@ The following is a canonicalized overlay object. SAID values are illustrative.
 A fully canonicalized JSON oca_package with SAIDs populated for demonstrative purposes, including a minimal capture_base and the array_delimiter overlay in ADC extensions. Values are compact for SAID calculation reproduction.
 
 ```
-{"d":"EHn2q6d3P5w0Xa9V4b7Kc2LmQ8sR1Tz6Ue3Jg0Mi5NoP","type":"oca_package/1.0","oca_bundle":{"v":"OCAA11JSON000411_","bundle":{"v":"OCAS11JSON0003xZ_","d":"EC8t4aVr6Qe1n9YwM2Kc5Lb0Jr7Hu3Do1Pz6Xg4Tf8Ui","capture_base":{"d":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/capture_base/1.1","attributes":{"coordinates":"Text","tags":"Text"},"classification":"","flagged_attributes":[]},"overlays":{}}},"dependencies":[]},"extensions":{"adc":{"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI":{"d":"EPb7y1Qe0Lk2R3vH8yR5fG6tD1cS4mV0XzAaQpLsWu3J","type":"community/adc/extension/1.0","overlays":{"array_delimiter":{"d":"EGYdY1b3Yp0jM2qR7kQvFfT2mKf3sVb0cWn9xZp8Lu1H","type":"community/overlays/adc/array_delimiter/1.1","attributes":{"coordinates":{"delimiter":";","trim_whitespace":false},"tags":{"allow_empty_elements":false,"delimiter":"|","element_escape_char":"\\\"","element_quote_char":"\\\"","trim_whitespace":true}},"delimiter":"|"}}}}}}
+{"d":"EHn2q6d3P5w0Xa9V4b7Kc2LmQ8sR1Tz6Ue3Jg0Mi5NoP","type":"oca_package/1.0","oca_bundle":{"v":"OCAA11JSON000411_","bundle":{"v":"OCAS11JSON0003xZ_","d":"EC8t4aVr6Qe1n9YwM2Kc5Lb0Jr7Hu3Do1Pz6Xg4Tf8Ui","capture_base":{"d":"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI","type":"spec/capture_base/1.1","attributes":{"coordinates":"Text","tags":"Text"},"classification":"","flagged_attributes":[]},"overlays":{}}},"dependencies":[]},"extensions":{"adc":{"EIQhXN6TmYZDHixCkPBDu9LfM9k2u9Ek_iJmpRBszqbI":{"d":"EPb7y1Qe0Lk2R3vH8yR5fG6tD1cS4mV0XzAaQpLsWu3J","type":"community/adc/extension/1.0","overlays":{"array_delimiter":{"d":"EGYdY1b3Yp0jM2qR7kQvFfT2mKf3sVb0cWn9xZp8Lu1H","type":"community/overlays/adc/array_delimiter/1.1","attributes":{"coordinates":{"delimiter":";","trim_whitespace":false},"tags":{"allow_empty_elements":false,"delimiter":"|","element_escape_char":"\\\\","element_quote_char":"\\\"","trim_whitespace":true}},"delimiter":"|"}}}}}}
 ```
 
 ## Normative references
