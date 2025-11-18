@@ -16,7 +16,11 @@ This is distinct from the file (field) delimiter configured by a file delimiter 
 
 Keys defined by this overlay:
 - `delimiter` (string, REQUIRED): Default in-cell array delimiter. MUST be exactly one Unicode code point in JSON string form (e.g., “|”, “;”, “,”, “\t”).
-- `attributes` (object, OPTIONAL): Per-attribute overrides, keyed by attribute name. Each value is an object supporting:
+- `element_quote_char` (string, REQUIRED): Character used to quote individual array elements, default `"` if omitted.
+- `element_escape_char` (string, REQUIRED): Character used to escape `element_quote_char` within an element. Defaults to `\` if omitted.
+- `trim_whitespace` (boolean, REQUIRED): If true, leading/trailing ASCII whitespace around unquoted elements SHOULD be trimmed during parse and SHOULD NOT be added during generation.
+- `allow_empty_elements` (boolean, REQUIRED): If true, empty elements between adjacent delimiters are permitted and must be preserved in round-trip.
+- `attributes` (object, OPTIONAL): Per-attribute overrides, keyed by attribute name. Only for array datatype attributes. Each value is an object supporting:
   - `delimiter` (string, OPTIONAL): Attribute-specific array delimiter; same single-code-point requirement.
   - `element_quote_char` (string, OPTIONAL): Character used to quote individual array elements, default `"` if omitted.
   - `element_escape_char` (string, OPTIONAL): Character used to escape `element_quote_char` within an element. Defaults to `\` if omitted.
@@ -63,7 +67,7 @@ The following is a canonicalized overlay object. SAID values are illustrative.
 **Rules summary**:
 
 - `delimiter` MUST be present and MUST represent exactly one Unicode code point as a JSON string.
-- `attributes` MAY provide per-attribute overrides; attribute names MUST exist in the capture_base.
+- `attributes` MAY provide per-attribute overrides; attribute names MUST exist in the capture_base and must be array datatypes.
 - If `element_quote_char` is omitted, it defaults to `"`. 
 - If `element_escape_char` is omitted, it defaults to `\`.
 - If `trim_whitespace` is true, implementations SHOULD trim only when elements are not quoted.
