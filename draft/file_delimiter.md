@@ -16,10 +16,10 @@ This overlay works alongside other presentation/formatting overlays. For example
 
 Keys defined by this overlay:
 - `delimiter` (string, REQUIRED): The single-character field delimiter used between values. Allowed examples include ",", ";", "\t" (tab), and "|". Custom single-character Unicode delimiters are allowed; the value MUST represent exactly one Unicode code point in JSON string form.
-- `data_start_row` (integer, OPTIONAL): The 1-based row index at which data rows begin. MUST be a positive integer. Row counting starts at 1. For example, `2` indicates that the data begins on row 2.
-- `quote_char` (string, OPTIONAL): Character used to quote fields, default is `"` (double quote) if omitted.
-- `escape_char` (string, OPTIONAL): Character used to escape `quote_char` inside quoted fields. If omitted, defaults to the same value as `quote_char`.
-- `line_terminator` (string, OPTIONAL): Line break sequence for rows (e.g., "\n" or "\r\n"). If omitted, consumers MAY auto-detect; producers SHOULD default to "\n" unless platform constraints require otherwise.
+- `data_start_row` (integer, REQUIRED): The 1-based row index at which data rows begin. MUST be a positive integer. Row counting starts at 1. For example, `2` indicates that the data begins on row 2.
+- `quote_char` (string, REQUIRED): Character used to quote fields. If absent use quote_char="".
+- `escape_char` (string, REQUIRED): Character used to escape `quote_char` inside quoted fields. If absent use escape_char="".
+- `line_terminator` (string, REQUIRED): Line break sequence for rows ("\n" or "\r\n" or ""). If an empty-string, consumers will auto-detect.
 
 This overlay does not change attribute semantics. It specifies file-level serialization behavior so CSV/TSV-like files can be correctly generated and parsed across locales.
 
@@ -53,9 +53,6 @@ FIX THIS LATER AFTER CODING
 **Rules summary**:
 
 - `delimiter` MUST be present and MUST represent exactly one Unicode code point as a JSON string (e.g., ",", ";", "|", or "\t" for tab).
-- If `quote_char` is omitted, it defaults to `"` (double quote). If `escape_char` is omitted, it defaults to the same value as `quote_char`.
-- If `line_terminator` is omitted, producers SHOULD use "\n" unless target environments require "\r\n"; consumers MAY auto-detect.
-- If `data_start_row` is present, it MUST be a positive integer and row counting starts at 1. For example, `1` indicates data begins on the first row; `2` indicates a single header row.
 - This overlay MUST NOT alter attribute semantics or numeric formatting; those concerns are addressed by other overlays (e.g., `decimal_separator`).
 
 **Test case**:
