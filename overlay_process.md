@@ -1,3 +1,7 @@
+**Author:** Ali Asjad  
+**Date published:** 21/05/2026 
+**Version:** 1.0.0
+
 # Overlay Creation Process (ADC) 
 
 ## Step 1: Draft Creation
