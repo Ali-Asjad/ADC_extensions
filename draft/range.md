@@ -57,7 +57,7 @@ Then there objects with the name of each attribute which are lexicographically o
 **Test case**: 
 
 ```
-{"d":"EJP5d2We2-IK3EDpXI3iQDJxYUcx-rGVgDoW08f_3v5Z","type":"oca_package/1.0","oca_bundle":{"v":"OCAA11JSON0002fe_","bundle":{"v":"OCAS11JSON0002e1_","d":"EFKCawe2eHCk_bNFtFiOha32FSaS1U_O-3RNEVBwLRLM","capture_base":{"d":"EMV5IVcCcY78c8LuFuYAhQjVUFPRyMQchLYQo7qvOfbx","type":"spec/capture_base/1.1","attributes":{"RangeTestData":"Numeric"},"classification":"RDF106","flagged_attributes":[]},"overlays":{"format":{"d":"EDUU56TKUL4kahy1AGzfSIB8sOBX7JJjuv52vMQ-SP-i","capture_base":"EMV5IVcCcY78c8LuFuYAhQjVUFPRyMQchLYQo7qvOfbx","type":"spec/overlays/format/1.1","attribute_formats":{"RangeTestData":"^-?[0-9]+$"}},"meta":[{"d":"EJGW55JB6fNb7r0Tdnw8CJ8hqwiovSDVh_bocKNMJUht","capture_base":"EMV5IVcCcY78c8LuFuYAhQjVUFPRyMQchLYQo7qvOfbx","type":"spec/overlays/meta/1.1","language":"eng","description":"Schema generated for range overlay test","name":"TestSchema"}]}},"dependencies":[]},"extensions":{"adc":{"EMV5IVcCcY78c8LuFuYAhQjVUFPRyMQchLYQo7qvOfbx":{"d":"EKZjYN49Q2njt6tRc3eeA7J-5T31SjJVrPKhHiNyr-ma","type":"community/adc/extension/1.0","overlays":{"ordering":{"d":"EP-WgzX2XHwEzq7Dma4ZSz4PxRU3N2V_l3Gda5egXAbs","capture_base":"EMV5IVcCcY78c8LuFuYAhQjVUFPRyMQchLYQo7qvOfbx","type":"community/overlays/adc/ordering/1.0","attribute_ordering":["RangeTestData"],"entry_code_ordering":{}},"range":{"d":"EGlHuwbJRThDCLPTai68wukxgkJ90GaXd0AuEKoGrs6r","capture_base":"EMV5IVcCcY78c8LuFuYAhQjVUFPRyMQchLYQo7qvOfbx","type":"community/overlays/adc/range/1.0","attributes":{"RangeTestData":{"lower":"25","lower_inclusive":true,"upper":"75","upper_inclusive":true}}}}}}}}
+Intentionally left empty
 ```
 
 ## Normative references
