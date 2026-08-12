@@ -18,11 +18,12 @@ In OCA, three types of information are contextually framed:
 
 **Canonicalization Rules**:
 
-The framing overlays begins with the canonical ordering of [extension overlays](https://github.com/agrifooddatacanada/OCA_package_standard/tree/fix/key_values_requirements?tab=readme-ov-file#oca-package-syntax-requirements).
+The framing overlays begin with the canonical ordering of [extension overlays](https://github.com/agrifooddatacanada/OCA_package_standard/tree/fix/key_values_requirements?tab=readme-ov-file#oca-package-syntax-requirements).
 
 1. `d` (digest of the overlay)
-2. `type` (community/overlay/adc/framing_overlay_type/1.1) where `framing_overlay_type` is one of `attribute_framing`, `unit_framing`, or `entry_code_framing`.
-3. overlay properties (e.g. `attribute_framing`, `unit_framing`, `entry_code_framing`) and their conanicalization rules are defined in their respective overlays section.
+2. `capture_base` (capture base SAID the overlay is specific to)
+3. `type` (`community/overlays/adc/framing_overlay_type/1.1`) where `framing_overlay_type` is one of `attribute_framing`, `unit_framing`, or `entry_code_framing`.
+4. overlay properties (e.g. `framing_metadata`, `attributes`, `units`, `entry_codes`) and their canonicalization rules are defined in their respective overlays section.
 
 **Example**:
 
@@ -109,76 +110,111 @@ Only the four required SSSOM metadata elements are utilized:
 | predicate_id              | predicate_id           |
 | framing_justification     | matching_justification |
 
-As mentioned above, there are three type of information in OCA being framed, thus three types of framing overlays: Attribute framing overlay, Unit framing overlay, and Entry code framing overlay.
+As mentioned above, there are three types of information in OCA being framed, thus three types of framing overlays: Attribute framing overlay, Unit framing overlay, and Entry code framing overlay.
 
-Each framing overlay type can have more than one overlays of the same variant. Each variant is of a single source of external concept being used to frame the OCA schema objects.
+Each framing overlay type can have more than one overlay of the same variant. Each variant is of a single primary external vocabulary being used to frame the OCA schema objects.
 
-With this after after adding the `d` and `type`,`framing_metadata` MUST follow.
+After `d`, `capture_base`, and `type`, `framing_metadata` MUST follow.
 
 ```
 // the structure of framing metadata
 
 "framing_metadata": {
-    "id": "SNOMEDCT", // Identifier of resource (SAIDs, DOIs, PURLs, or common names e.g. UCUM)
-    "label": "Systematized Nomenclature of Medicine Clinical Terms", // Label of resource (e.g. Unified Code for Units of Measure)
-    "location": "https://bioportal.bioontology.org/ontologies/SNOMEDCT", // Location of resource (e.g. https://ucum.org/)
-    "version": "2023AA" // Resource version (e.g. 2.1).
-  },
+  "prefix": "dcat", // Short prefix for the primary vocabulary (reusable in term references)
+  "label": "Data Catalog Vocabulary", // Label of the primary vocabulary
+  "location": "http://www.w3.org/ns/dcat#", // Base URI / location of the primary vocabulary
+  "version": "3", // Version of the primary vocabulary
+  "imports": { // Supporting vocabularies imported by the primary vocabulary
+    "dcterms": {
+      "label": "DCMI Metadata Terms",
+      "location": "http://purl.org/dc/terms/",
+      "version": "1.1"
+    },
+    "foaf": {
+      "label": "Friend of a Friend",
+      "location": "http://xmlns.com/foaf/0.1/",
+      "version": "0.1"
+    }
+  }
+},
 ```
+
+`framing_metadata` declares a **primary vocabulary** (`prefix`, `label`, `location`, `version`) and optional supporting vocabularies under `imports`. This establishes a clear hierarchy—for example, DCAT is what is being framed, while `dcterms` and `foaf` are imported to support it—while providing reusable prefixes for term references. Each key in `imports` is the supporting vocabulary's prefix; each value MUST include `label`, `location`, and `version`.
 
 **Attribute framing overlay example**
 
 ```
 
-// canonicalization rules: d, type, framing_metadata, attributes
+// canonicalization rules: d, capture_base, type, framing_metadata, attributes
 
-"attribute_framing":{
-  "d": "XXXX",
-  "type": "spec/overlays/attribute_framing/1.1",
+"attribute_framing": {
+  "d": "EATqm9RE_ckegiaeLGeqt1onz89FQQi8NtMykQnG3MTL",
+  "capture_base": "EJRQHb6p4iBOt1oB6jdeG6cQhU9gY9KuI7oyAtuky8fI",
+  "type": "community/overlays/adc/attribute_framing/1.1",
   "framing_metadata": {
-    "id": "SNOMEDCT",
-    "label": "Systematized Nomenclature of Medicine Clinical Terms",
-    "location": "https://bioportal.bioontology.org/ontologies/SNOMEDCT",
-    "version": "2023AA"
+    "prefix": "dcat",
+    "label": "Data Catalog Vocabulary",
+    "location": "http://www.w3.org/ns/dcat#",
+    "version": "3",
+    "imports": {
+      "dcterms": {
+        "label": "DCMI Metadata Terms",
+        "location": "http://purl.org/dc/terms/",
+        "version": "1.1"
+      },
+      "foaf": {
+        "label": "Friend of a Friend",
+        "location": "http://xmlns.com/foaf/0.1/",
+        "version": "0.1"
+      }
+    }
   },
   "attributes": {
-    "Albumin_concentration": {
-      "framing_justification": "semapv:ManualMappingCuration",
-      "predicate_id": "skos:exactMatch",
-      "term_id": ""
+    "dcterms.title": {
+      "description": "A name given to the resource.",
+      "framing_justification": "semapv:MappingReview",
+      "predicate_id": "skos:relatedMatch",
+      "term_id": "title object"
     },
-    "Glucose_concentration": {
+    "dcterms.type": {
+      "description": "The nature or genre of the resource.",
       "framing_justification": "semapv:ManualMappingCuration",
-      "predicate_id": "skos:exactMatch",
-      "term_id": ""
-    },
-    "Sample_type": {
-      "framing_justification": "semapv:ManualMappingCuration",
-      "predicate_id": "skos:exactMatch",
-      "term_id": ""
+      "predicate_id": "skos:broadMatch",
+      "term_id": "type object"
     }
   }
 }
 ```
 
+Each keyed object under `attributes` MAY include:
+
+| Property                | Required | Description                                                                 |
+| ----------------------- | -------- | --------------------------------------------------------------------------- |
+| description             | no       | Human-readable description of the framed attribute / mapped concept         |
+| framing_justification   | yes      | SSSOM matching justification (`semapv:` term)                               |
+| predicate_id            | yes      | SKOS mapping predicate describing the relationship                          |
+| term_id                 | yes      | Object term from the primary or imported vocabulary                         |
+
 **Unit framing overlay example**
 
 ```
 
-// canonicalization rules: d, type, framing_metadata, units
+// canonicalization rules: d, capture_base, type, framing_metadata, units
 
-"unit_framing":{
+"unit_framing": {
   "d": "XXXX",
-  "type": "spec/overlays/unit_framing/1.1",
+  "capture_base": "Etszl9LgLUjllI950rd2lO6rF5-BP_jGzXGBPkFZCZFA",
+  "type": "community/overlays/adc/unit_framing/1.1",
   "framing_metadata": {
-    "id": "UCUM",
-    "label": "",
+    "prefix": "ucum",
+    "label": "Unified Code for Units of Measure",
     "location": "https://ucum.org/",
-    "version": ""
+    "version": "2.1",
+    "imports": {}
   },
   "units": {
     "mg/dL": {
-      "framing_justification": "semapv:ManualMappingCuration"
+      "framing_justification": "semapv:ManualMappingCuration",
       "predicate_id": "skos:exactMatch",
       "term_id": "mg/dL"
     }
@@ -190,21 +226,23 @@ With this after after adding the `d` and `type`,`framing_metadata` MUST follow.
 
 ```
 
-// canonicalization rules: d, type, framing_metadata, entry_codes
+// canonicalization rules: d, capture_base, type, framing_metadata, entry_codes
 
-"entry_code_framing":{
+"entry_code_framing": {
   "d": "XXXXX",
-  "type": "spec/overlays/entry_code_framing/1.1",
+  "capture_base": "Etszl9LgLUjllI950rd2lO6rF5-BP_jGzXGBPkFZCZFA",
+  "type": "community/overlays/adc/entry_code_framing/1.1",
   "framing_metadata": {
-    "id": "SNOMEDCT",
+    "prefix": "snomedct",
     "label": "Systematized Nomenclature of Medicine Clinical Terms",
     "location": "https://bioportal.bioontology.org/ontologies/SNOMEDCT",
-    "version": "2023AA"
+    "version": "2023AA",
+    "imports": {}
   },
   "entry_codes": {
     "Sample_type": {
       "BLD001": {
-        "framing_justification": "semapv:ManualMappingCuration"
+        "framing_justification": "semapv:ManualMappingCuration",
         "predicate_id": "skos:closeMatch",
         "term_id": ""
       },
@@ -235,16 +273,18 @@ With this after after adding the `d` and `type`,`framing_metadata` MUST follow.
 
 ### Rules summary for framing overlays
 
-- For each framing overlay there must be a `frame id`.
-- Within each overlay framing type (attribute, unit or entry_code) each `frame id` must be unique.
+- For each framing overlay there must be a `framing_metadata.prefix` identifying the primary vocabulary.
+- Within each overlay framing type (attribute, unit or entry_code) each `prefix` must be unique.
+- `framing_metadata.imports` MAY declare supporting vocabularies; each import key is a prefix and MUST include `label`, `location`, and `version`.
 - Not every term must be framed
 - For each attribute or entry_code framing there can be only one `skos:exactMatch` per term.
 - For unit framing, each unit used in a schema can be framed only once.
 - For unit framing, each unit can only be framed using `skos:exactMatch`
+- Attribute framing entries MAY include an optional `description`
 
 **Predicate_id**
 
-The `predicate_id` MUST be a `skos` term for describing the relatioship between the `subject_id` and `object_id`.
+The `predicate_id` MUST be a `skos` term for describing the relationship between the `subject_id` and `object_id`.
 
 | Skos term         | Description                                                                                                                                                                                                                                                                                                                               |
 | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -276,10 +316,10 @@ Source: SEMAPV: [A Vocabulary for Semantic Mappings](https://github.com/mapping-
 
 **Test case**:
 
-Unit Framing Overaly
+Unit Framing Overlay
 
 ```
-{"d":"EME1KjyGWqp25U_1snb5kCN7KLIDe5UBae4czFYYXOq-","type":"oca_package/1.0","oca_bundle":{"v":"OCAA11JSON0004a4_","bundle":{"v":"OCAS11JSON000487_","d":"EFPGBEwn5Hzl9Cbx1r9Od54IwhkqJXc3vE4Jm7mjvHy2","capture_base":{"d":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/capture_base/1.1","attributes":{"age":"Text","height":"Text","languages":"Text"},"classification":"","flagged_attributes":[]},"overlays":{"entry":[{"d":"EPF1_UJBIUow7nhkWxZKBazHvPRPtSw23C2A551KP0Iw","capture_base":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/overlays/entry/1.1","language":"eng","attribute_entries":{"languages":{"eng":"English","fra":"Français"}}}],"entry_code":{"d":"EH3-TrXb_zsql5SLdTIGBjZcwBkiEZ8CXEpQT4FPS-XD","capture_base":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/overlays/entry_code/1.1","attribute_entry_codes":{"languages":["eng","fra"]}},"meta":[{"d":"EP-ER88GMUXIrkk9hhF8z0IS3ji1l2mYjAXwCI-0Y06S","capture_base":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/overlays/meta/1.1","language":"eng","description":"Athlete","name":"Cricket"}],"unit":{"d":"EGGyEF22FXecJq9ShCxJcn0cBLHrNLyXEW4GrZm6ivcy","capture_base":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/overlays/unit/1.1","attribute_unit":{"height":"kg"}}}},"dependencies":[]},"extensions":{"adc":{"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l":{"d":"EMB8WpIeu78Gdbq9pgJ9gOJmwW5pq13TLvLOQPuqxHvR","type":"community/adc/extension/1.0","overlays":{"example":[{"d":"EIue3pCTsb60lSFkc6H71Y9zFe8R40pCuSoHJWVqP3gs","type":"community/overlays/adc/example/1.1","language":"ar","attribute_examples":{"Albumin_concentration":["52.69"],"Glucose_concentration":["8.7"],"Sample_name":["عينة"],"Sample_type":["BLD003"]}},{"d":"EKVqonNv_5Z0r0yu8tan_6lI2Bohu1cP2nSF4eE6uFPz","type":"community/overlays/adc/example/1.1","language":"eng","attribute_examples":{"Albumin_concentration":["52.69"],"Glucose_concentration":["8.7"],"Sample _name":["Carlys_sample"],"Sample_type":["BLD003"]}}],"ordering":{"d":"EDvp_MElDjSTw1nLpnKDQGsf0T3RO8L3Iaox5x0raQBZ","type":"community/overlays/adc/ordering/1.1","attribute_ordering":["age","height","languages"],"entry_code_ordering":{"languages":{"languages":["eng","fra"]}}},"range":{"d":"EJaUhjByzOY7joq5iMIJ4BcG62Ju73IMzmw70wNLBR_u","type":"community/overlays/adc/range/1.1","attributes":{"age":{"lower":"0","lower_inclusive":true,"upper":"100","upper_inclusive":true},"height":{"lower":"0","lower_inclusive":true,"upper":"300","upper_inclusive":false}}},"sensitive":{"d":"EO8ftlqoiGmbsATLr9TAxUaE8a0bRrWpM2shXwszqLG6","type":"community/overlays/adc/sensitive/1.1","sensitive_attributes":["age"]},"unit_framing":{"d":"EObBElHhoeff-oJx_bCQfav4qOZ3RCwFH7xdqzQx1qB7","type":"community/overlays/adc/unit_framing/1.1","framing_metadata":{"id":"UCUM","label":"","location":"","version":""},"units":{"kg":{"framing_justification":"semapv:ManualMappingCuration","predicate_id":"skos:exactMatch","term_id":"kg"}}}}}}}}
+{"d":"EME1KjyGWqp25U_1snb5kCN7KLIDe5UBae4czFYYXOq-","type":"oca_package/1.0","oca_bundle":{"v":"OCAA11JSON0004a4_","bundle":{"v":"OCAS11JSON000487_","d":"EFPGBEwn5Hzl9Cbx1r9Od54IwhkqJXc3vE4Jm7mjvHy2","capture_base":{"d":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/capture_base/1.1","attributes":{"age":"Text","height":"Text","languages":"Text"},"classification":"","flagged_attributes":[]},"overlays":{"entry":[{"d":"EPF1_UJBIUow7nhkWxZKBazHvPRPtSw23C2A551KP0Iw","capture_base":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/overlays/entry/1.1","language":"eng","attribute_entries":{"languages":{"eng":"English","fra":"Français"}}}],"entry_code":{"d":"EH3-TrXb_zsql5SLdTIGBjZcwBkiEZ8CXEpQT4FPS-XD","capture_base":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/overlays/entry_code/1.1","attribute_entry_codes":{"languages":["eng","fra"]}},"meta":[{"d":"EP-ER88GMUXIrkk9hhF8z0IS3ji1l2mYjAXwCI-0Y06S","capture_base":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/overlays/meta/1.1","language":"eng","description":"Athlete","name":"Cricket"}],"unit":{"d":"EGGyEF22FXecJq9ShCxJcn0cBLHrNLyXEW4GrZm6ivcy","capture_base":"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l","type":"spec/overlays/unit/1.1","attribute_unit":{"height":"kg"}}}},"dependencies":[]},"extensions":{"adc":{"EJXNTP69W5wu-5ypWqLZX_nY4lQjCE2mdjw0diko-56l":{"d":"EMB8WpIeu78Gdbq9pgJ9gOJmwW5pq13TLvLOQPuqxHvR","type":"community/adc/extension/1.0","overlays":{"example":[{"d":"EIue3pCTsb60lSFkc6H71Y9zFe8R40pCuSoHJWVqP3gs","type":"community/overlays/adc/example/1.1","language":"ar","attribute_examples":{"Albumin_concentration":["52.69"],"Glucose_concentration":["8.7"],"Sample_name":["عينة"],"Sample_type":["BLD003"]}},{"d":"EKVqonNv_5Z0r0yu8tan_6lI2Bohu1cP2nSF4eE6uFPz","type":"community/overlays/adc/example/1.1","language":"eng","attribute_examples":{"Albumin_concentration":["52.69"],"Glucose_concentration":["8.7"],"Sample _name":["Carlys_sample"],"Sample_type":["BLD003"]}}],"ordering":{"d":"EDvp_MElDjSTw1nLpnKDQGsf0T3RO8L3Iaox5x0raQBZ","type":"community/overlays/adc/ordering/1.1","attribute_ordering":["age","height","languages"],"entry_code_ordering":{"languages":{"languages":["eng","fra"]}}},"range":{"d":"EJaUhjByzOY7joq5iMIJ4BcG62Ju73IMzmw70wNLBR_u","type":"community/overlays/adc/range/1.1","attributes":{"age":{"lower":"0","lower_inclusive":true,"upper":"100","upper_inclusive":true},"height":{"lower":"0","lower_inclusive":true,"upper":"300","upper_inclusive":false}}},"sensitive":{"d":"EO8ftlqoiGmbsATLr9TAxUaE8a0bRrWpM2shXwszqLG6","type":"community/overlays/adc/sensitive/1.1","sensitive_attributes":["age"]},"unit_framing":{"d":"EObBElHhoeff-oJx_bCQfav4qOZ3RCwFH7xdqzQx1qB7","type":"community/overlays/adc/unit_framing/1.1","framing_metadata":{"prefix":"ucum","label":"Unified Code for Units of Measure","location":"https://ucum.org/","version":"2.1","imports":{}},"units":{"kg":{"framing_justification":"semapv:ManualMappingCuration","predicate_id":"skos:exactMatch","term_id":"kg"}}}}}}}}
 ```
 
 ## Normative references
