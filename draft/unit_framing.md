@@ -1,4 +1,4 @@
-**Title**: Framing by ADC - v1.1
+**Title**: Unit Framing by ADC - v1.1
 
 **Community Grouping**: community/adc/extension/v1.1
 
@@ -16,14 +16,16 @@ In OCA, three types of information are contextually framed:
 2. **Units** where a schema unit is framed to a unit drawn from another concept.
 3. **Entry codes** where a schema entry code term is framed to a term drawn from another concept.
 
+This overlay covers **unit framing**.
+
 **Canonicalization Rules**:
 
 The framing overlays begin with the canonical ordering of [extension overlays](https://github.com/agrifooddatacanada/OCA_package_standard/tree/fix/key_values_requirements?tab=readme-ov-file#oca-package-syntax-requirements).
 
 1. `d` (digest of the overlay)
 2. `capture_base` (capture base SAID the overlay is specific to)
-3. `type` (`community/overlays/adc/framing_overlay_type/1.1`) where `framing_overlay_type` is one of `attribute_framing`, `unit_framing`, or `entry_code_framing`.
-4. overlay properties (e.g. `framing_metadata`, `attributes`, `units`, `entry_codes`) and their canonicalization rules are defined in their respective overlays section.
+3. `type` (`community/overlays/adc/unit_framing/1.1`)
+4. `framing_metadata`, then `units`, each lexicographically ordered.
 
 **Example**:
 
@@ -57,44 +59,6 @@ The framing overlays begin with the canonical ordering of [extension overlays](h
     "Glucose_concentration": "mg/dL"
   }
 }
-```
-
-**Entry code overlay:** showing the schema entry codes to be framed:
-
-```
-{
-  "capture_base": "Etszl9LgLUjllI950rd2lO6rF5-BP_jGzXGBPkFZCZFA",
-  "digest": "EHg4AoXVKZrgFMN_c91qo4b9sgF3mWAtAtqn7no85Ldo",
-  "type": "spec/overlays/entry_code/1.0",
-  "attribute_entry_codes": {
-    "Sample_type": [
-      "BLD001",
-      "BLD002",
-      "BLD003",
-      "BLD004",
-      "BLD005"
-    ]
-  }
-}
-
-// Entry Overlay
-
-{
-  "capture_base": "Etszl9LgLUjllI950rd2lO6rF5-BP_jGzXGBPkFZCZFA",
-  "digest": "EiX132uHOFWph3kwBvjnkalbGDYagttuKr97olGRLOy4",
-  "type": "spec/overlays/entry/1.0",
-  "language": "en",
-  "attribute_entries": {
-    "Sample_type": {
-      "BLD001": "No_preserv_no_anti-coag",
-      "BLD002": "K2_EDTA",
-      "BLD003": "sodium_citrate",
-      "BLD004": "sodium_heparin",
-      "BLD005": "acid_citrate_dextrose"
-    }
-  }
-}
-
 ```
 
 #### Framing Overlays and Relationships
@@ -141,60 +105,6 @@ After `d`, `capture_base`, and `type`, `framing_metadata` MUST follow.
 
 `framing_metadata` declares a **primary vocabulary** (`prefix`, `label`, `location`, `version`) and optional supporting vocabularies under `imports`. This establishes a clear hierarchy—for example, DCAT is what is being framed, while `dcterms` and `foaf` are imported to support it—while providing reusable prefixes for term references. Each key in `imports` is the supporting vocabulary's prefix; each value MUST include `label`, `location`, and `version`.
 
-**Attribute framing overlay example**
-
-```
-
-// canonicalization rules: d, capture_base, type, framing_metadata, attributes
-
-"attribute_framing": {
-  "d": "EATqm9RE_ckegiaeLGeqt1onz89FQQi8NtMykQnG3MTL",
-  "capture_base": "EJRQHb6p4iBOt1oB6jdeG6cQhU9gY9KuI7oyAtuky8fI",
-  "type": "community/overlays/adc/attribute_framing/1.1",
-  "framing_metadata": {
-    "prefix": "dcat",
-    "label": "Data Catalog Vocabulary",
-    "location": "http://www.w3.org/ns/dcat#",
-    "version": "3",
-    "imports": {
-      "dcterms": {
-        "label": "DCMI Metadata Terms",
-        "location": "http://purl.org/dc/terms/",
-        "version": "1.1"
-      },
-      "foaf": {
-        "label": "Friend of a Friend",
-        "location": "http://xmlns.com/foaf/0.1/",
-        "version": "0.1"
-      }
-    }
-  },
-  "attributes": {
-    "dcterms.title": {
-      "description": "A name given to the resource.",
-      "framing_justification": "semapv:MappingReview",
-      "predicate_id": "skos:relatedMatch",
-      "term_id": "title object"
-    },
-    "dcterms.type": {
-      "description": "The nature or genre of the resource.",
-      "framing_justification": "semapv:ManualMappingCuration",
-      "predicate_id": "skos:broadMatch",
-      "term_id": "type object"
-    }
-  }
-}
-```
-
-Each keyed object under `attributes` MAY include:
-
-| Property                | Required | Description                                                                 |
-| ----------------------- | -------- | --------------------------------------------------------------------------- |
-| description             | no       | Human-readable description of the framed attribute / mapped concept         |
-| framing_justification   | yes      | SSSOM matching justification (`semapv:` term)                               |
-| predicate_id            | yes      | SKOS mapping predicate describing the relationship                          |
-| term_id                 | yes      | Object term from the primary or imported vocabulary                         |
-
 **Unit framing overlay example**
 
 ```
@@ -222,65 +132,14 @@ Each keyed object under `attributes` MAY include:
 }
 ```
 
-**Entry code framing overlay example**
-
-```
-
-// canonicalization rules: d, capture_base, type, framing_metadata, entry_codes
-
-"entry_code_framing": {
-  "d": "XXXXX",
-  "capture_base": "Etszl9LgLUjllI950rd2lO6rF5-BP_jGzXGBPkFZCZFA",
-  "type": "community/overlays/adc/entry_code_framing/1.1",
-  "framing_metadata": {
-    "prefix": "snomedct",
-    "label": "Systematized Nomenclature of Medicine Clinical Terms",
-    "location": "https://bioportal.bioontology.org/ontologies/SNOMEDCT",
-    "version": "2023AA",
-    "imports": {}
-  },
-  "entry_codes": {
-    "Sample_type": {
-      "BLD001": {
-        "framing_justification": "semapv:ManualMappingCuration",
-        "predicate_id": "skos:closeMatch",
-        "term_id": ""
-      },
-      "BLD002": {
-        "framing_justification": "semapv:ManualMappingCuration",
-        "predicate_id": "skos:broadMatch",
-        "term_id": ""
-      },
-      "BLD003": {
-        "framing_justification": "semapv:ManualMappingCuration",
-        "predicate_id": "skos:broadMatch",
-        "term_id": ""
-      },
-      "BLD004": {
-        "framing_justification": "semapv:ManualMappingCuration",
-        "predicate_id": "skos:broadMatch",
-        "term_id": ""
-      },
-      "BLD005": {
-        "framing_justification": "semapv:ManualMappingCuration",
-        "predicate_id": "skos:broadMatch",
-        "term_id": ""
-      }
-    }
-  }
-}
-```
-
-### Rules summary for framing overlays
+### Rules summary for unit framing overlays
 
 - For each framing overlay there must be a `framing_metadata.prefix` identifying the primary vocabulary.
 - Within each overlay framing type (attribute, unit or entry_code) each `prefix` must be unique.
 - `framing_metadata.imports` MAY declare supporting vocabularies; each import key is a prefix and MUST include `label`, `location`, and `version`.
 - Not every term must be framed
-- For each attribute or entry_code framing there can be only one `skos:exactMatch` per term.
 - For unit framing, each unit used in a schema can be framed only once.
 - For unit framing, each unit can only be framed using `skos:exactMatch`
-- Attribute framing entries MAY include an optional `description`
 
 **Predicate_id**
 
@@ -307,7 +166,7 @@ The `framing_justification` MUST be a `semapv` term for describing the justifica
 |semapv:LogicalReasoning|A matching process based on the inferences made by a logical reasoner.|
 |semapv:LexicalMatching|A matching process based on a lexical comparison between one or more syntactic features of the subject with one or more syntactic features of the object.|
 |semapv:CompositeMatching|A matching process based on multiple, possibly intertwined, matching approaches.|
-|semapv:UnspecifiedMatching|A matching process based on an unspecified comparison.|
+|semapv:UnspecifiedMatching||A matching process based on an unspecified comparison.|
 |semapv:SemanticSimilarityThresholdMatching||A matching process based on a minimum threshold of a score from a comparison based on a semantic similarity algorithm.|
 |semapv:LexicalSimilarityThresholdMatching|A lexical matching process based on a minimum threshold of a score from a comparison based on a lexical similarity algorithm.|
 |semapv:MappingChaining|A matching process based on the traversing of multiple mappings.|
